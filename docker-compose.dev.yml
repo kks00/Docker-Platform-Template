@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    command: npm run dev
+    develop:
+      watch:
+        - action: sync
+          path: ./Backend
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./Backend/package.json
+
+  frontend:
+    command: npm run dev
+    develop:
+      watch:
+        - action: sync
+          path: ./Frontend
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./Frontend/package.json
+
+  nginx:
+    environment:
+      - NGINX_LOG_LEVEL=debug
