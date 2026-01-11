@@ -9,6 +9,8 @@ services:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     environment:
       BACKEND_PORT: ${BACKEND_PORT}
+    depends_on:
+      - database
     networks:
       - app-network
 

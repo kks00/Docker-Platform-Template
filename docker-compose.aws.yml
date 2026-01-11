@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    # ECR Repository URI for backend
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NAMESPACE}/backend:latest
+    platform: linux/amd64
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    # ECR Repository URI for frontend
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NAMESPACE}/frontend:latest
+    platform: linux/amd64
+
+  nginx:
+    # ECR Repository URI for nginx
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NAMESPACE}/nginx:latest
+    platform: linux/amd64
+    environment:
+      - BACKEND_HOST=localhost
+      - FRONTEND_HOST=localhost
+
+  database:
+    # ECR Repository URI for database
+    image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NAMESPACE}/database:latest
+    platform: linux/amd64
